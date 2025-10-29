@@ -1,0 +1,570 @@
+// レスポンシブル
+$breakpoints: (
+    "sm": "screen and (max-width: 600px)",
+    "md": "screen and (max-width: 768px)",
+    "lg": "screen and (max-width: 1024px)"
+) !default;
+
+@use "sass:map";
+@mixin mq($breakpoint) {
+    @media #{map.get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+$header-color: #D7E9C9;
+$footer-color:#F6F7FF;
+$font_color:#2f4f4f;
+$border-color:#975698;
+$hum-color:#e1ede6;
+$font-size:2.8em;
+$font-size_1:1.5em;
+$font-size_2:1.9em;
+
+html{
+     font-size: 62.5%;
+     /* 1remが10pxに */
+     scroll-behavior: smooth;
+     @include mq(lg){
+          font-size: 70%;
+     }
+     @include mq(md){
+          font-size: 65%;
+     }     
+     @include mq(sm){
+          font-size: 50%;
+     }
+}
+html, body {
+     overflow-x: hidden; /* 横スクロールバーを非表示に */
+     box-sizing: border-box;
+}
+.btn{
+     a{
+          background-color: $header-color;
+          margin: 10px;
+          text-decoration: none;
+          color: $font_color;
+          font-size: $font-size_2;
+          padding: 10px 20px;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          z-index: 1000;
+          white-space: nowrap;  /* テキストの折返しを禁止 */
+          &:hover{
+               background-color: $footer-color;
+               font-weight: bold;
+               transition:  0.4s;
+          }
+     }
+}
+body{
+     font-family: "メイリオ","Hiragino Sans",sans-serif;
+     margin: 0;
+     padding: 0;
+     
+
+     // スライドショー//         
+     .top{
+          padding-top: 80px;  // header分の余白 //
+          min-height: calc(100vh - 80px);  // footer80px引いた//
+          background-image: url(../image/大地の詩TOP.jpg);
+          background-size: cover;
+          background-position: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          overflow-y: hidden; /* 縦スクロールをなくす */
+          h1{
+               background-color: rgba(246,247,255,0.85);
+               font-size: $font-size;
+               width:23em;       // emはそのテキストのフォントサイズに連動
+               max-width: 95vw;    // 画面幅の95%まで
+               color: $font_color;
+               text-align: center;
+               padding: 30px 15px;
+               border-radius: 15px;
+               margin: auto;
+               // @include mq(lg){
+               // font-size: 2rem;
+               // width: auto;
+               // padding: 25px 15px;
+               // }
+               // @include mq(sm){
+               //      font-size: 2rem;
+               //      width: auto;
+               //      padding: 20px 10px;
+               // }
+          }
+          
+     }
+     .go-cart{
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 1100;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin: 0;
+          flex-wrap: nowrap; /* 子要素が複数行に折れないように */
+          a{
+               width: auto; 
+               white-space: nowrap; /* テキストの折返しを禁止 */
+               @include mq(md){
+                    margin: 8px 5px;
+                    padding: 8px ;
+                    font-size: 1.4rem;
+               }
+          }
+          @include mq(sm){
+               left: 50%;
+               transform: translateX(-50%);
+               bottom: 16px;
+               flex-direction: row;
+          }
+     }
+
+     .pay{
+          position: fixed;
+          bottom:20%;
+          right: 5%;
+          z-index: 900;
+          text-align: center; 
+          padding: 3px 8px;
+          color: #333333;
+          background-color: transparent;
+          font-size: $font-size_2;
+          width: auto;
+          height: auto;
+          border-radius: 3px;
+          box-shadow: -1px -1px 5px 1px rgba(0, 90, 255, 0.8), 1px 1px 5px 1px rgba(0, 213, 83, 0.8);
+          /* 滑らかなホバー用トランジションを基底に置く（太字や色変化を滑らかにする） */
+          transition: background-color 0.35s ease, transform 0.25s ease, font-weight 0.35s ease, box-shadow 0.35s ease;
+          /* 軽い拡大で強調すると太字のジャンプが目立たなくなる */
+          transform-origin: center;
+          &:hover{
+               font-weight: 700; /* bold */
+               background-color: $header-color;
+               transform: scale(1.03);
+               box-shadow: -3px -3px 10px 3px rgba(0, 90, 255, 0.85), 3px 3px 10px 3px rgba(0, 213, 83, 0.85);
+          }
+          a{
+               text-decoration:none;
+               color:$font_color;
+          }
+          @include mq(sm){
+               bottom: 30%;
+               right: 3%;
+               font-size: $font-size_1;
+               padding: 2px 6px;
+          }
+     }
+
+     header{
+          height: 80px;
+          background-color: $header-color;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: fixed;  /* 固定 */
+          width: 100%;      /* 幅100%に設定 */
+          top: 0;           /* 上端から0に配置 */
+          z-index: 1000;   /* 階層を前面に */
+               .header_1{
+                    margin: 0 20px;
+                    a{
+                         text-decoration: none;
+                         color: $font_color;
+                    }
+                    p{
+                         font-size: $font-size_1;
+                         font-weight: bold;
+                    }
+                         .header_2{
+                              font-size: $font-size;
+                              font-weight: bold;
+                         }
+               }
+               .hum{
+                    position: fixed;  /*固定*/
+                    cursor: pointer;  /* 指のマーク*/
+                    z-index: 9999;   /* 階層を前面*/
+                    display: none; /*PCサイズでは非表示*/
+                    right: 15px;
+                    top: 15px;
+                    width: 50px;
+                    height: 50px;
+                    font-size: 2.5rem;
+                    background-color: $header-color;
+                    color: $font_color;
+                    @include mq(sm){
+                         display: flex;
+                         justify-content: center;
+                         align-items: center;     
+                         i:first-child{
+                              display: block;  /*ハンバーガーメニューを表示している*/
+                         }
+                         i:last-child{
+                              display: none;  /*Xマークを消している*/
+                         }
+                    }
+               }
+               .close{                 
+                    @include mq(sm){
+                         i:first-child{
+                              display: none;  /*ハンバーガーメニューを消している*/
+                         }
+                         i:last-child{
+                              display: block;  /*Xマークを表示している*/
+                         }
+                    }
+               }         
+               nav{
+                    ul{
+                         list-style-type: none;
+                         display: flex;
+                         justify-content: end;
+                         align-items:end;
+                         @include mq(sm){
+                              display: block;
+                              padding-top: 120px;
+                              text-align: center;
+                              
+                         }
+                         li{
+                              display: block;
+                              border-left: 1px solid $border-color;
+                              @include mq(sm){
+                                   border-left: none;
+                              }
+                              a{
+                                   text-decoration: none;
+                                   color: $font_color;
+                                   margin: 0 20px;
+                                   font-size: $font-size_1;
+                                   @include mq(sm){
+                                        display: block;
+                                        margin: 30px 0;  /* 縦の余白*/
+                                        border-bottom: 1px solid $font_color;                                        
+                                   }
+                                   i{
+                                        margin: 0 8px;
+                                   }
+                              }
+                         }
+                    }
+                    @include mq(sm){
+                    position: fixed;
+                    z-index: 1100;
+                    top: 80px;
+                    right: -300px;           /* ←最初は画面外に隠す */
+                    width: 300px;            /* 出てくるメニューの幅 */
+                    box-sizing: border-box;
+                    padding:0 .6rem;
+                    min-height: calc(100vh - 160px);   /* 画面の縦の幅 */
+                    background-color: $hum-color;
+                    transition: right 0.3s ease;  /* スライドのアニメーション */
+                    }
+               }
+               .show {
+               right: 0;                 /* 右端に表示される */
+               }   
+     }
+
+     // サブページ共通-------
+     section{
+     width: 80%;
+     margin-left: auto;
+     margin-right: auto;
+     padding:30px 0;
+     @include mq(sm){
+          width: 95%;
+          }
+     }
+     h2{
+     width:80%;
+     margin-left: auto;
+     margin-right: auto;
+     border-bottom: 5px solid $border-color;
+     text-align: center;
+     font-size: 2rem;
+     margin-bottom: 30px;
+     @include mq(sm){
+          font-size: 1.5rem;
+          }
+     }
+     .center{
+     text-align: center; /*中央寄せしたいときいつでも使える*/
+     }
+     article{
+     min-height: calc(100vh - 160px); /* 画面の高さからheader80とfooter80の高さを引いた分 */   
+     }
+     
+     //コンセプトページ
+     .concept{
+          margin-top: 80px; /* header分の余白 */
+          h1{
+               background-image: url(../image/大地の詩背景.jpg);
+               background-size: cover;
+               font-size: 2.5rem;
+               padding: 30px 0;
+               text-align: center;
+               span{
+                    background-color:#F6F7FFBF ;
+                    display: block;
+                    text-align: center;
+               }
+          }
+          section{
+               .concept-in{
+                    display: grid;
+                    grid-template-columns: 2fr 3fr ; /* 2:3の比率でカラムを作成 */
+                    gap: 20px; /* 要素間の隙間 */
+                    @include mq(sm){
+                         display: block;
+                    }
+                    img{
+                         width: 100%;
+                         display: block;
+                         // max-width: 50%; /* 幅を50%に設定 */
+                         // height: auto;
+                    }
+                    p{
+                         font-size: 2rem;
+                         line-height: 4;
+                         // display: flex;
+                         // max-width: 45%; /* 幅を45%に設定 */
+                         @include mq(lg){
+                              font-size: 1.5rem;
+                              line-height: 1.8;
+                         }
+                    }
+               }
+          }
+     }
+
+     //オンラインショップ
+     .shop{
+          margin-top: 80px; /* header分の余白 */
+          margin-bottom: 80px; /* footer分の余白 */
+          h1{
+               background-image: url(../image/大地の詩背景.jpg);
+               background-size: cover;
+               font-size: 2.5rem;
+               padding: 30px 0;
+               text-align: center;
+               span{
+                    background-color:#F6F7FFBF ;
+                    display: block;
+                    text-align: center;
+               }
+          }
+          .catch{
+               font-size: $font-size;
+               width: 80%;
+               text-align: left;
+               margin: auto;
+               @include mq(md){
+                    font-size: $font-size_1;
+               }
+          }
+          .shop-in{
+               display: grid;
+               grid-template-columns: repeat(3, 1fr); /* 3列のグリッド */
+               gap: 20px 50px; /* グリッドアイテム間の隙間 */
+               margin-top: 30px;
+               //画面幅に応じて自動的にカラム数調整
+               // grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+               @include mq(md){
+                    grid-template-columns: repeat(2, 1fr); /* 画面幅が768px以下の場合は2列に変更 */
+               }
+               @include mq(sm){
+                    grid-template-columns: 1fr; /* 画面幅が600px以下の場合は1列に変更 */
+                    div{
+                         max-width: 80%;
+                         margin: auto;
+                    }
+                    }
+               
+               h3{
+                    border-left: 5px solid $border-color;
+                    font-size: 1.7rem;
+                    padding-left: 10px;
+               }
+               .product{   
+                    font-size: $font-size_1;
+                    margin-left: 15px;
+               }
+               img{
+                    width: 95%;
+                    margin: 5px 2.5% 15px;
+               }
+               form{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: $font-size_1;
+                    margin: auto;
+                    select{
+                         border: 1px solid $border-color;
+                         width: 4em; /*幅4文字分指定*/
+                         text-align: center;
+                    }
+                    button{
+                    background-color: $header-color;
+                    color: $font_color;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                    border-radius: 5px;
+                    // width: 10em;
+                    text-align: center;
+                        padding: 5px 20px;
+                        white-space: nowrap; /* テキストの折返しを禁止 */
+                        word-break: keep-all;
+                    margin: 0 20px;
+                    cursor: pointer;
+                    &:hover{
+                         background-color: $footer-color;
+                         font-weight: bold;
+                         }
+                    }
+
+               }
+          }
+     }
+
+     //カートのページ
+     .cart{
+          margin-top: 80px; /* header分の余白 */
+          margin-bottom: 80px; /* footer分の余白 */
+          h1{
+               background-image: url(../image/大地の詩背景.jpg);
+               background-size: cover;
+               font-size: 2.5rem;
+               padding: 30px 0;
+               text-align: center;
+               span{
+                    background-color:#F6F7FFBF ;
+                    display: block;
+                    text-align: center;
+               }
+          }
+          .cart-img{
+               margin: 20px auto;
+               width: 60px;
+               display: block;
+          }
+          .cart-list{
+               width: 80%;
+               margin: auto;
+               
+               p{
+                    // display: grid;
+                    // grid-template-columns: 1fr 1fr;
+                    text-align: center;
+                    margin-top: 20px;
+                    border-bottom: 1px solid $border-color;
+                    font-size: $font-size_1;
+               }
+          }
+          hr{
+               margin: 5px 0;
+               display: block;
+          }
+          .total{
+               text-align: center;
+               font-size: 1.5rem;
+               font-weight: bold;
+               margin-top: 20px;
+          }
+     }
+     
+     //買い物かごページ
+     .cart_view{
+          margin-top: 80px; /* header80px分の余白 */
+          margin-bottom: 80px; /* footer80px分の余白 */
+          h1{
+               background-image: url(../image/大地の詩背景.jpg);
+               background-size: cover;
+               font-size: 2.5rem;
+               padding: 30px 0;
+               text-align: center;
+               // position: sticky;  /* スクロールに応じて固定 */
+               // top: 80px;           /* 上端から80に配置 */
+               // width: 100%;      /* 幅100%に設定 */
+               // z-index: 1000;   /* 階層を前面に */
+               span{
+                    background-color:#F6F7FFBF ;
+                    display: block;
+                    text-align: center;
+               }
+          }
+          p{
+               text-align: center;
+               font-size: $font-size_1;
+               margin-top: 15px;
+          }
+          h4{
+               text-align: center;
+               font-size: $font-size_1;
+               margin-top: 15px;
+          }          
+          h5{
+               text-align: center;
+               font-size: 2rem;
+               margin-top: 10px;
+               font-weight: bold;
+          }
+          .item_group{
+               p{
+                    margin: 8px auto;
+               }
+               a{
+                    border: grey 2px solid;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    display: block;
+                    margin: 1px auto;
+                    max-width: 4em;
+               }
+          }
+     }
+
+     //かご削除のページ
+     .delete{
+          margin-top: 80px; /* header80px分の余白 */
+          margin-bottom: 80px; /* footer80px分の余白 */
+          text-align: center;
+          padding-top: 50px;
+          h1,h2{
+               display: block;
+               font-size: 2em;
+          }
+          @include mq("md"){
+               margin-top: 150px;
+          }
+     }
+     .go-shop{
+          bottom: 40%;
+     }
+     footer{
+          height: 80px;
+          background-color: $footer-color;
+          color: $font_color;
+          display: flex;
+          justify-content: right;
+          align-items: center;
+          position: fixed;  /* 固定 */
+          width: 100%;      /* 幅100%に設定 */
+          bottom: 0;           /* 下端から0に配置 */
+          z-index: 500;   /* 階層を前面に */
+          @include mq(lg){
+               display: flex;
+               align-items: flex-end;
+          }          
+     }
+}

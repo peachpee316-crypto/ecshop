@@ -1,0 +1,535 @@
+@charset "UTF-8";
+html {
+  font-size: 62.5%;
+  /* 1remが10pxに */
+  scroll-behavior: smooth;
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 65%;
+  }
+}
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+html, body {
+  overflow-x: hidden; /* 横スクロールバーを非表示に */
+  box-sizing: border-box;
+}
+
+.btn a {
+  background-color: #D7E9C9;
+  margin: 10px;
+  text-decoration: none;
+  color: #2f4f4f;
+  font-size: 1.9em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  white-space: nowrap; /* テキストの折返しを禁止 */
+}
+.btn a:hover {
+  background-color: #F6F7FF;
+  font-weight: bold;
+  transition: 0.4s;
+}
+
+body {
+  font-family: "メイリオ", "Hiragino Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+body .top {
+  padding-top: 80px;
+  min-height: calc(100vh - 80px);
+  background-image: url(../image/大地の詩TOP.jpg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-y: hidden; /* 縦スクロールをなくす */
+}
+body .top h1 {
+  background-color: rgba(246, 247, 255, 0.85);
+  font-size: 2.8em;
+  width: 23em;
+  max-width: 95vw;
+  color: #2f4f4f;
+  text-align: center;
+  padding: 30px 15px;
+  border-radius: 15px;
+  margin: auto;
+}
+body .go-cart {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  flex-wrap: nowrap; /* 子要素が複数行に折れないように */
+}
+body .go-cart a {
+  width: auto;
+  white-space: nowrap; /* テキストの折返しを禁止 */
+}
+@media screen and (max-width: 768px) {
+  body .go-cart a {
+    margin: 8px 5px;
+    padding: 8px;
+    font-size: 1.4rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  body .go-cart {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 16px;
+    flex-direction: row;
+  }
+}
+body .pay {
+  position: fixed;
+  bottom: 20%;
+  right: 5%;
+  z-index: 900;
+  text-align: center;
+  padding: 3px 8px;
+  color: #333333;
+  background-color: transparent;
+  font-size: 1.9em;
+  width: auto;
+  height: auto;
+  border-radius: 3px;
+  box-shadow: -1px -1px 5px 1px rgba(0, 90, 255, 0.8), 1px 1px 5px 1px rgba(0, 213, 83, 0.8);
+  /* 滑らかなホバー用トランジションを基底に置く（太字や色変化を滑らかにする） */
+  transition: background-color 0.35s ease, transform 0.25s ease, font-weight 0.35s ease, box-shadow 0.35s ease;
+  /* 軽い拡大で強調すると太字のジャンプが目立たなくなる */
+  transform-origin: center;
+}
+body .pay:hover {
+  font-weight: 700; /* bold */
+  background-color: #D7E9C9;
+  transform: scale(1.03);
+  box-shadow: -3px -3px 10px 3px rgba(0, 90, 255, 0.85), 3px 3px 10px 3px rgba(0, 213, 83, 0.85);
+}
+body .pay a {
+  text-decoration: none;
+  color: #2f4f4f;
+}
+@media screen and (max-width: 600px) {
+  body .pay {
+    bottom: 30%;
+    right: 3%;
+    font-size: 1.5em;
+    padding: 2px 6px;
+  }
+}
+body header {
+  height: 80px;
+  background-color: #D7E9C9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* 固定 */
+  width: 100%; /* 幅100%に設定 */
+  top: 0; /* 上端から0に配置 */
+  z-index: 1000; /* 階層を前面に */
+}
+body header .header_1 {
+  margin: 0 20px;
+}
+body header .header_1 a {
+  text-decoration: none;
+  color: #2f4f4f;
+}
+body header .header_1 p {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+body header .header_1 .header_2 {
+  font-size: 2.8em;
+  font-weight: bold;
+}
+body header .hum {
+  position: fixed; /*固定*/
+  cursor: pointer; /* 指のマーク*/
+  z-index: 9999; /* 階層を前面*/
+  display: none; /*PCサイズでは非表示*/
+  right: 15px;
+  top: 15px;
+  width: 50px;
+  height: 50px;
+  font-size: 2.5rem;
+  background-color: #D7E9C9;
+  color: #2f4f4f;
+}
+@media screen and (max-width: 600px) {
+  body header .hum {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  body header .hum i:first-child {
+    display: block; /*ハンバーガーメニューを表示している*/
+  }
+  body header .hum i:last-child {
+    display: none; /*Xマークを消している*/
+  }
+}
+@media screen and (max-width: 600px) {
+  body header .close i:first-child {
+    display: none; /*ハンバーガーメニューを消している*/
+  }
+  body header .close i:last-child {
+    display: block; /*Xマークを表示している*/
+  }
+}
+body header nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+@media screen and (max-width: 600px) {
+  body header nav ul {
+    display: block;
+    padding-top: 120px;
+    text-align: center;
+  }
+}
+body header nav ul li {
+  display: block;
+  border-left: 1px solid #975698;
+}
+@media screen and (max-width: 600px) {
+  body header nav ul li {
+    border-left: none;
+  }
+}
+body header nav ul li a {
+  text-decoration: none;
+  color: #2f4f4f;
+  margin: 0 20px;
+  font-size: 1.5em;
+}
+@media screen and (max-width: 600px) {
+  body header nav ul li a {
+    display: block;
+    margin: 30px 0; /* 縦の余白*/
+    border-bottom: 1px solid #2f4f4f;
+  }
+}
+body header nav ul li a i {
+  margin: 0 8px;
+}
+@media screen and (max-width: 600px) {
+  body header nav {
+    position: fixed;
+    z-index: 1100;
+    top: 80px;
+    right: -300px; /* ←最初は画面外に隠す */
+    width: 300px; /* 出てくるメニューの幅 */
+    box-sizing: border-box;
+    padding: 0 0.6rem;
+    min-height: calc(100vh - 160px); /* 画面の縦の幅 */
+    background-color: #e1ede6;
+    transition: right 0.3s ease; /* スライドのアニメーション */
+  }
+}
+body header .show {
+  right: 0; /* 右端に表示される */
+}
+body section {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 0;
+}
+@media screen and (max-width: 600px) {
+  body section {
+    width: 95%;
+  }
+}
+body h2 {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 5px solid #975698;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 600px) {
+  body h2 {
+    font-size: 1.5rem;
+  }
+}
+body .center {
+  text-align: center; /*中央寄せしたいときいつでも使える*/
+}
+body article {
+  min-height: calc(100vh - 160px); /* 画面の高さからheader80とfooter80の高さを引いた分 */
+}
+body .concept {
+  margin-top: 80px; /* header分の余白 */
+}
+body .concept h1 {
+  background-image: url(../image/大地の詩背景.jpg);
+  background-size: cover;
+  font-size: 2.5rem;
+  padding: 30px 0;
+  text-align: center;
+}
+body .concept h1 span {
+  background-color: rgba(246, 247, 255, 0.7490196078);
+  display: block;
+  text-align: center;
+}
+body .concept section .concept-in {
+  display: grid;
+  grid-template-columns: 2fr 3fr; /* 2:3の比率でカラムを作成 */
+  gap: 20px; /* 要素間の隙間 */
+}
+@media screen and (max-width: 600px) {
+  body .concept section .concept-in {
+    display: block;
+  }
+}
+body .concept section .concept-in img {
+  width: 100%;
+  display: block;
+}
+body .concept section .concept-in p {
+  font-size: 2rem;
+  line-height: 4;
+}
+@media screen and (max-width: 1024px) {
+  body .concept section .concept-in p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+  }
+}
+body .shop {
+  margin-top: 80px; /* header分の余白 */
+  margin-bottom: 80px; /* footer分の余白 */
+}
+body .shop h1 {
+  background-image: url(../image/大地の詩背景.jpg);
+  background-size: cover;
+  font-size: 2.5rem;
+  padding: 30px 0;
+  text-align: center;
+}
+body .shop h1 span {
+  background-color: rgba(246, 247, 255, 0.7490196078);
+  display: block;
+  text-align: center;
+}
+body .shop .catch {
+  font-size: 2.8em;
+  width: 80%;
+  text-align: left;
+  margin: auto;
+}
+@media screen and (max-width: 768px) {
+  body .shop .catch {
+    font-size: 1.5em;
+  }
+}
+body .shop .shop-in {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列のグリッド */
+  gap: 20px 50px; /* グリッドアイテム間の隙間 */
+  margin-top: 30px;
+}
+@media screen and (max-width: 768px) {
+  body .shop .shop-in {
+    grid-template-columns: repeat(2, 1fr); /* 画面幅が768px以下の場合は2列に変更 */
+  }
+}
+@media screen and (max-width: 600px) {
+  body .shop .shop-in {
+    grid-template-columns: 1fr; /* 画面幅が600px以下の場合は1列に変更 */
+  }
+  body .shop .shop-in div {
+    max-width: 80%;
+    margin: auto;
+  }
+}
+body .shop .shop-in h3 {
+  border-left: 5px solid #975698;
+  font-size: 1.7rem;
+  padding-left: 10px;
+}
+body .shop .shop-in .product {
+  font-size: 1.5em;
+  margin-left: 15px;
+}
+body .shop .shop-in img {
+  width: 95%;
+  margin: 5px 2.5% 15px;
+}
+body .shop .shop-in form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  margin: auto;
+}
+body .shop .shop-in form select {
+  border: 1px solid #975698;
+  width: 4em; /*幅4文字分指定*/
+  text-align: center;
+}
+body .shop .shop-in form button {
+  background-color: #D7E9C9;
+  color: #2f4f4f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px 20px;
+  white-space: nowrap; /* テキストの折返しを禁止 */
+  word-break: keep-all;
+  margin: 0 20px;
+  cursor: pointer;
+}
+body .shop .shop-in form button:hover {
+  background-color: #F6F7FF;
+  font-weight: bold;
+}
+body .cart {
+  margin-top: 80px; /* header分の余白 */
+  margin-bottom: 80px; /* footer分の余白 */
+}
+body .cart h1 {
+  background-image: url(../image/大地の詩背景.jpg);
+  background-size: cover;
+  font-size: 2.5rem;
+  padding: 30px 0;
+  text-align: center;
+}
+body .cart h1 span {
+  background-color: rgba(246, 247, 255, 0.7490196078);
+  display: block;
+  text-align: center;
+}
+body .cart .cart-img {
+  margin: 20px auto;
+  width: 60px;
+  display: block;
+}
+body .cart .cart-list {
+  width: 80%;
+  margin: auto;
+}
+body .cart .cart-list p {
+  text-align: center;
+  margin-top: 20px;
+  border-bottom: 1px solid #975698;
+  font-size: 1.5em;
+}
+body .cart hr {
+  margin: 5px 0;
+  display: block;
+}
+body .cart .total {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+body .cart_view {
+  margin-top: 80px; /* header80px分の余白 */
+  margin-bottom: 80px; /* footer80px分の余白 */
+}
+body .cart_view h1 {
+  background-image: url(../image/大地の詩背景.jpg);
+  background-size: cover;
+  font-size: 2.5rem;
+  padding: 30px 0;
+  text-align: center;
+}
+body .cart_view h1 span {
+  background-color: rgba(246, 247, 255, 0.7490196078);
+  display: block;
+  text-align: center;
+}
+body .cart_view p {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 15px;
+}
+body .cart_view h4 {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 15px;
+}
+body .cart_view h5 {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+body .cart_view .item_group p {
+  margin: 8px auto;
+}
+body .cart_view .item_group a {
+  border: grey 2px solid;
+  border-radius: 5px;
+  text-decoration: none;
+  display: block;
+  margin: 1px auto;
+  max-width: 4em;
+}
+body .delete {
+  margin-top: 80px; /* header80px分の余白 */
+  margin-bottom: 80px; /* footer80px分の余白 */
+  text-align: center;
+  padding-top: 50px;
+}
+body .delete h1, body .delete h2 {
+  display: block;
+  font-size: 2em;
+}
+@media screen and (max-width: 768px) {
+  body .delete {
+    margin-top: 150px;
+  }
+}
+body .go-shop {
+  bottom: 40%;
+}
+body footer {
+  height: 80px;
+  background-color: #F6F7FF;
+  color: #2f4f4f;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: fixed; /* 固定 */
+  width: 100%; /* 幅100%に設定 */
+  bottom: 0; /* 下端から0に配置 */
+  z-index: 500; /* 階層を前面に */
+}
+@media screen and (max-width: 1024px) {
+  body footer {
+    display: flex;
+    align-items: flex-end;
+  }
+}/*# sourceMappingURL=mystyle.css.map */

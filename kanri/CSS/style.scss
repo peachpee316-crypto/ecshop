@@ -1,0 +1,25 @@
+@charset "utf-8";
+@use "_breakpoint" as *;
+@use "_mixin" as *;
+@use "_color" as *;
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    @include mq(sm){
+        font-size: 57%;
+        // スマホ時、全体的に文字を小さくする
+    }
+}
+a{
+    text-decoration: none;
+}
+header{
+     font-size: 20px;
+}
+
+h1{
+    border: 1px solid $border-color;
+    width: 4em; /*幅4文字分指定*/
+    text-align: center;
+}
